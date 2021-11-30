@@ -37,6 +37,7 @@ SO_kubli <- Seurat::AddMetaData(SO_kubli, Seurat::PercentageFeatureSet(SO_kubli,
 SO_kubli <- subset(SO_kubli, cells = SeuratObject::WhichCells(SO_kubli, expression = pct.mt < 30))
 SO_kubli <- subset(SO_kubli, cells = SeuratObject::WhichCells(SO_kubli, expression = nFeature_RNA < 7000))
 SO_kubli <- Seurat::NormalizeData(SO_kubli)
+table(SO_kubli@meta.data$orig.ident)
 
 ## ---- prepare_Seurat_object_Riedel --------------
 raw_mat <- do.call(cbind, lapply(list.files(file.path(wd, "data", "GSE140133"), pattern = "GSM4147195|GSM4147196", full.names = T, recursive = T), function(x) {
