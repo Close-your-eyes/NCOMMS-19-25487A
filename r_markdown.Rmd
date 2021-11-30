@@ -1,0 +1,47 @@
+---
+title: "NCOMMS-19-25487A"
+author: "Christopher M. Skopnik"
+date: "11/30/2021"
+output: html_document
+---
+
+```{r, include=F}
+knitr::opts_chunk$set(echo = T)
+knitr::read_chunk("r_script.R")
+```
+
+## R Code to reproduce figures
+
+Please download the deposited data for [GSE130287](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE130287) and [GSE140133](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE140133).  
+Have the required files organized in a root folder as follows (the markdown files will )
+
+```{r, include=F}
+wd <- dirname(rstudioapi::getActiveDocumentContext()$path)
+```
+
+```{r folder_structure, echo = F}
+```
+
+```{r setup, message=F}
+```
+
+```{r rename_gene_barcode_matrix_files_for_Kubli_et_al_(GSE130287), message=F, results="hide", eval= T}
+```
+
+```{r prepare_Seurat_object_Kubli, message=F, warning=F}
+```
+
+```{r prepare_Seurat_object_Riedel, message=F, warning=F}
+```
+
+```{r create_figures, message=F, fig.width=16, fig.height=6}
+```
+
+```{r reverse renaming, include=F}
+paths <- list.files(file.path(wd, "data", "GSE130287"), recursive = T, full.names = T)
+file.rename(paths, file.path(dirname(paths), paste0("GSM3735297_Fcmr_", c("MinusMinus_barcodes.tsv", "MinusMinus_genes.tsv", "MinusMinus_matrix.mtx", "PlusPlus_barcodes.tsv", "PlusPlus_genes.tsv", "PlusPlus_matrix.mtx"), ".gz")))
+```
+
+```{r }
+sessionInfo()
+```
