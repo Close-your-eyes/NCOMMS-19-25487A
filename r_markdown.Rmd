@@ -10,10 +10,10 @@ knitr::opts_chunk$set(echo = T)
 knitr::read_chunk("r_script.R")
 ```
 
-## R Code to reproduce figures
+## R Code to reproduce Figure 1
 
 Please download the deposited data for [GSE130287](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE130287) and [GSE140133](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE140133).  
-Have the required files organized in a root folder as follows (the markdown files will )
+Have the required files organized in a root folder as follows:
 
 ```{r, include=F}
 wd <- dirname(rstudioapi::getActiveDocumentContext()$path)

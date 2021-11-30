@@ -172,8 +172,8 @@ pre code {
 </div>
 
 
-<div id="r-code-to-reproduce-figures" class="section level2">
-<h2>R Code to reproduce figures</h2>
+<div id="r-code-to-reproduce-figure-1" class="section level2">
+<h2>R Code to reproduce Figure 1</h2>
 <p>Please download the deposited data for <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE130287">GSE130287</a> and <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE140133">GSE140133</a>.<br />
 Have the required files organized in a root folder as follows:</p>
 <pre><code>##  [1] &quot;data/GSE130287/fcmr_mm/GSM3735297_Fcmr_MinusMinus_barcodes.tsv.gz&quot;
@@ -184,9 +184,12 @@ Have the required files organized in a root folder as follows:</p>
 ##  [6] &quot;data/GSE130287/fcmr_pp/GSM3735297_Fcmr_PlusPlus_matrix.mtx.gz&quot;    
 ##  [7] &quot;data/GSE140133/GSM4147195_spleen2_filtered_gene_bc_matrices_h5.h5&quot;
 ##  [8] &quot;data/GSE140133/GSM4147196_spleen3_filtered_gene_bc_matrices_h5.h5&quot;
-##  [9] &quot;r_markdown.html&quot;                                                  
-## [10] &quot;r_markdown.Rmd&quot;                                                   
-## [11] &quot;r_script.R&quot;</code></pre>
+##  [9] &quot;Matter_arising_NCOMMS.Rproj&quot;                                      
+## [10] &quot;r_markdown.html&quot;                                                  
+## [11] &quot;r_markdown.Rmd&quot;                                                   
+## [12] &quot;r_script.R&quot;                                                       
+## [13] &quot;README.md&quot;                                                        
+## [14] &quot;README.Rmd&quot;</code></pre>
 <pre class="r"><code>if (!&quot;tidyverse&quot; %in% rownames(installed.packages())) {install.packages(&quot;tidyverse&quot;)}
 if (!&quot;Seurat&quot; %in% rownames(installed.packages())) {install.packages(&quot;Seurat&quot;)}
 if (!&quot;rstudioapi&quot; %in% rownames(installed.packages())) {install.packages(&quot;rstudioapi&quot;)}

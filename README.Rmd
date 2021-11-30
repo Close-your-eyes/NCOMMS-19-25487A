@@ -1,0 +1,27 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+# Matter_arising: NCOMMS-19-25487A
+
+Here you can find the code for reproducing **Figure 1** from our manuscript.
+
+This repository only contains the R code, the data from the original publication have to be downloaded from NCBIs [Gene Expression Omnibus](https://www.ncbi.nlm.nih.gov/geo/).
+
+[Kubli et. al](https://www.nature.com/articles/s41467-019-10619-w) have their data deposited under [GSE130287](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE130287).
+[Riedel et. al](https://www.nature.com/articles/s41467-020-16464-6) have their data deposited under [GSE140133](https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE140133).
+
+If you want to reproduce r_script.R on your local computer, download the deposited data and have the required files organized as indicated in r_markdown.html.
+
+The r_script.R file contains the actual code. r_markdown.Rmd creates the r_markdown.html from it.
+
+To quickly view the code and its output, simply download r_markdown.html and have it opened by a browser of your choice.
