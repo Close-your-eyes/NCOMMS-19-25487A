@@ -103,10 +103,10 @@ for (i in unique(counts_kubli$type)) {
     ggplot2::scale_y_log10(label = scientific_10) +
     ggplot2::scale_x_continuous(breaks = integer_breaks(n = 4)) +
     ggplot2::ylab("Number of cells") +
-    ggplot2::xlab("Raw values of unique molecular identifier (UMI) per cells") +
+    ggplot2::xlab("Raw values of unique molecular identifier (UMI) per cell") +
     ggplot2::facet_wrap(ggplot2::vars(feature), scales = "free", nrow = 1)
   print(p)
-  ggplot2::ggsave(p, filename = paste0("Fig.1a_", i, ".eps"), device = "eps", path = file.path(wd, "figures"), width = 16, height = 5)
+  ggplot2::ggsave(p, filename = paste0("Fig.1a_", i, ".eps"), device = "eps", path = file.path(wd, "figures"), width = 16, height = 4)
 }
 
 
@@ -118,9 +118,9 @@ ggplot2::ggplot(counts_riedel, ggplot2::aes(x = count)) +
   ggplot2::scale_y_log10(label = scientific_10) +
   ggplot2::scale_x_continuous(breaks = integer_breaks(n = 4)) +
   ggplot2::ylab("Number of cells") +
-  ggplot2::xlab("Raw values of unique molecular identifier (UMI) per cells") +
+  ggplot2::xlab("Raw values of unique molecular identifier (UMI) per cell") +
   ggplot2::facet_wrap(ggplot2::vars(feature), scales = "free", nrow = 1)
-ggplot2::ggsave(filename = "Fig.1b_wt.eps", device = "eps", path = file.path(wd, "figures"), width = 16, height = 5)
+ggplot2::ggsave(filename = "Fig.1b.eps", device = "eps", path = file.path(wd, "figures"), width = 16, height = 4)
 
 
 # Fig.1c
@@ -148,7 +148,7 @@ ggplot2::ggplot(umi, ggplot2::aes(x = Fcmr)) +
   ggplot2::ylab("Number of cells") +
   ggplot2::xlab(expression(paste(bold("Normalized "), bolditalic("Fcmr"), bold(" transcripts (UMI/cell in "), bold(Log[e]), bold(")")))) +
   ggplot2::facet_wrap(ggplot2::vars(type_italic), scales = "free", nrow = 1, labeller = label_parsed)
-ggplot2::ggsave(filename = "Fig.1c.eps", device = "eps", path = file.path(wd, "figures"), width = 10, height = 7)
+ggplot2::ggsave(filename = "Fig.1c.eps", device = "eps", path = file.path(wd, "figures"), width = 10, height = 4)
 
 
 
