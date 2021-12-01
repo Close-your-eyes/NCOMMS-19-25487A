@@ -5,13 +5,14 @@ if (!"tidyverse" %in% rownames(installed.packages())) {install.packages("tidyver
 if (!"Seurat" %in% rownames(installed.packages())) {install.packages("Seurat")}
 if (!"rstudioapi" %in% rownames(installed.packages())) {install.packages("rstudioapi")}
 if (!"hdf5r" %in% rownames(installed.packages())) {install.packages("hdf5r")}
+if (!"scales" %in% rownames(installed.packages())) {install.packages("scales")}
 
 library(tidyverse)
 library(Seurat) # Seurat V4
 wd <- dirname(rstudioapi::getActiveDocumentContext()$path)
 setwd(wd)
 
-# function for axis text used later
+# functions for axis text used later
 integer_breaks <- function(n = 5, ...) {
   fxn <- function(x) {
     breaks <- floor(base::pretty(x, n, ...))
@@ -21,8 +22,18 @@ integer_breaks <- function(n = 5, ...) {
   return(fxn)
 }
 
+scientific_10 <- function(x) {
+  if (all(substr(as.character(x[which(!is.na(x))]),1,1) == "1")) {
+    x[which(x>=100)] <- gsub("1e\\+", "10^", scales::scientific_format()(x[which(x>=100)]))
+  } else if (any(substr(as.character(x[which(!is.na(x))]),1,1) != "1")) {
+    x[which(x>=100)] <- gsub("e\\+", "%*%10^", scales::scientific_format()(x[which(x>=100)]))
+  }
+  parse(text = x)
+}
+
+
 ## ---- folder_structure --------------
-print(list.files(wd, recursive = T))
+print(list.files(wd, recursive = T)[which(grepl("^data|r_script.R", list.files(wd, recursive = T)))])
 
 ## ---- rename_gene_barcode_matrix_files_for_Kubli_et_al_(GSE130287) --------------
 # renaming required to make it valid for Seurat::Read10X (Seurat4)
@@ -89,26 +100,27 @@ for (i in unique(counts_kubli$type)) {
     ggplot2::geom_bar(color = "black", fill = "grey") +
     ggplot2::theme_bw() +
     ggplot2::theme(strip.background = element_rect(fill = "white", color = NA), strip.text = element_text(face = "bold.italic"), text = element_text(face = "bold", size = 20, color = "black")) +
-    ggplot2::scale_y_log10() +
+    ggplot2::scale_y_log10(label = scientific_10) +
     ggplot2::scale_x_continuous(breaks = integer_breaks(n = 4)) +
     ggplot2::ylab("Number of cells") +
     ggplot2::xlab("Raw values of unique molecular identifier (UMI) per cells") +
     ggplot2::facet_wrap(ggplot2::vars(feature), scales = "free", nrow = 1)
   print(p)
-  #ggplot2::ggsave(p, filename = paste0("Fig.1a_", i, ".eps"), device = "eps", path = wd, width = 16, height = 5)
+  ggplot2::ggsave(p, filename = paste0("Fig.1a_", i, ".eps"), device = "eps", path = file.path(wd, "figures"), width = 16, height = 5)
 }
+
 
 # Fig.1b
 ggplot2::ggplot(counts_riedel, ggplot2::aes(x = count)) +
   ggplot2::geom_bar(color = "black", fill = "grey") +
   ggplot2::theme_bw() +
   ggplot2::theme(strip.background = element_rect(fill = "white", color = NA), strip.text = element_text(face = "bold.italic"), text = element_text(face = "bold", size = 20, color = "black")) +
-  ggplot2::scale_y_log10() +
+  ggplot2::scale_y_log10(label = scientific_10) +
   ggplot2::scale_x_continuous(breaks = integer_breaks(n = 4)) +
   ggplot2::ylab("Number of cells") +
   ggplot2::xlab("Raw values of unique molecular identifier (UMI) per cells") +
   ggplot2::facet_wrap(ggplot2::vars(feature), scales = "free", nrow = 1)
-#ggplot2::ggsave(filename = "Fig.1b_wt.eps", device = "eps", path = wd, width = 16, height = 5)
+ggplot2::ggsave(filename = "Fig.1b_wt.eps", device = "eps", path = file.path(wd, "figures"), width = 16, height = 5)
 
 
 # Fig.1c
@@ -131,12 +143,12 @@ ggplot2::ggplot(umi, ggplot2::aes(x = Fcmr)) +
   ggplot2::geom_freqpoly(bins = 200) +
   ggplot2::theme_bw() +
   ggplot2::theme(strip.background = element_rect(fill = "white", color = NA), strip.text = element_text(face = "bold"), text = element_text(face = "bold", size = 20, color = "black")) +
-  ggplot2::scale_y_log10() +
+  ggplot2::scale_y_log10(label = scientific_10) +
   ggplot2::scale_x_continuous(breaks = integer_breaks(n = 4)) +
   ggplot2::ylab("Number of cells") +
   ggplot2::xlab(expression(paste(bold("Normalized "), bolditalic("Fcmr"), bold(" transcripts (UMI/cell in "), bold(Log[e]), bold(")")))) +
   ggplot2::facet_wrap(ggplot2::vars(type_italic), scales = "free", nrow = 1, labeller = label_parsed)
-#ggplot2::ggsave(filename = "Fig.1c.eps", device = "eps", path = wd, width = 10, height = 7)
+ggplot2::ggsave(filename = "Fig.1c.eps", device = "eps", path = file.path(wd, "figures"), width = 10, height = 7)
 
 
 
